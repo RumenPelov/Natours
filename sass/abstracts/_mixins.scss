@@ -1,0 +1,53 @@
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin absCenter {
+    position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%)    ;
+        -webkit-transform: translate(-50%, -50%)    ;
+        -moz-transform: translate(-50%, -50%)    ;
+        -ms-transform: translate(-50%, -50%)    ;
+        -o-transform: translate(-50%, -50%)    ;
+}
+
+
+//Media queries manager
+/*
+0 - 600px :       Phone
+600 - 900px:      Tablet portrait
+800 - 1200px:     Tablet landscape 
+1200 - 1800px:    Desktop  is where our normal styles apply
+1800 + :          Bog Desktop
+
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+ORDER: Base + typography > general layout + grid > page layout  > components
+
+1em = 16px
+*/
+
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 37.5em) { @content }; //600px only scren- applies only for screens, not for print etc. 
+    }
+    @if $breakpoint == tab-port {
+        @media only screen and (max-width: 56.25em) { @content }; //900px
+    }
+    @if $breakpoint == tab-land {
+        @media only screen and (max-width: 75em) { @content }; //1200px
+    }
+    @if $breakpoint == big-desktop {
+        @media only screen and (min-width: 112.5em) { @content }; //1800px
+    }
+}
